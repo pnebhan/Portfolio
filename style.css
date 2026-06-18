@@ -342,6 +342,29 @@ img { max-width: 100%; display: block; }
   font-family: var(--font-mono);
   font-size: 13px;
 }
+.project-media--stacked {
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+}
+.project-media--stacked img { width: 100%; height: auto; object-fit: cover; }
+.project-media-detail {
+  position: relative;
+  border-top: 1px solid var(--line);
+}
+.project-media-detail img { display: block; filter: brightness(0.92); }
+.project-media-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 14px;
+  background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.01em;
+}
 
 .project-body { padding: 32px 36px; }
 .project-body h3 {
