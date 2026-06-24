@@ -375,12 +375,12 @@ img { max-width: 100%; display: block; }
   min-height: 260px;
   overflow: hidden;
 }
-/* Single-image cards: fill the full grid cell */
+/* Single-image cards: fill the full grid cell, anchor to top-left where main content is */
 .project-media > img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
+  object-position: left top;
 }
 .project-media--empty {
   border: 1px dashed var(--line-strong);
