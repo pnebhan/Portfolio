@@ -106,6 +106,20 @@ img { max-width: 100%; display: block; }
 }
 .nav-cta:hover { border-color: var(--accent); color: var(--accent) !important; }
 
+/* Hire Me — solid accent CTA in nav */
+.nav-hire {
+  background: var(--accent);
+  color: var(--bg) !important;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 2px;
+  letter-spacing: 0.02em;
+  transition: background 0.2s ease;
+}
+.nav-hire:hover { background: var(--accent-deep); color: var(--bg) !important; }
+
 /* ============================================
    HERO
    ============================================ */
@@ -128,6 +142,33 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.12em;
   color: var(--accent);
   margin-bottom: 20px;
+}
+
+/* Availability badge — pulsing green dot with status text */
+.hero-available {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--slate);
+  letter-spacing: 0.05em;
+  border: 1px solid var(--line-strong);
+  padding: 6px 14px 6px 10px;
+  border-radius: 100px;
+  margin-bottom: 22px;
+}
+.available-dot {
+  flex-shrink: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #5CB85C;
+  animation: status-pulse 2.4s ease-in-out infinite;
+}
+@keyframes status-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(92, 184, 92, 0.5); }
+  50%       { box-shadow: 0 0 0 5px rgba(92, 184, 92, 0); }
 }
 
 .hero-title {
@@ -329,11 +370,18 @@ img { max-width: 100%; display: block; }
 .project-media {
   background: #15140F;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
-  min-height: 220px;
+  min-height: 260px;
+  overflow: hidden;
 }
-.project-media img { width: 100%; height: 100%; object-fit: cover; }
+/* Single-image cards: fill the full grid cell */
+.project-media > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
 .project-media--empty {
   border: 1px dashed var(--line-strong);
   margin: 16px;
@@ -342,24 +390,43 @@ img { max-width: 100%; display: block; }
   font-family: var(--font-mono);
   font-size: 13px;
 }
+/* Stacked two-image layout */
 .project-media--stacked {
   flex-direction: column;
   align-items: stretch;
   padding: 0;
 }
-.project-media--stacked img { width: 100%; height: auto; object-fit: cover; }
+/* Main image in stacked — takes top 60% of available height */
+.project-media--stacked > img {
+  flex: 3;
+  min-height: 0;
+  width: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+/* Detail image wrapper — takes bottom 40% */
 .project-media-detail {
+  flex: 2;
   position: relative;
   border-top: 1px solid var(--line);
+  min-height: 0;
+  overflow: hidden;
 }
-.project-media-detail img { display: block; filter: brightness(0.92); }
+.project-media-detail img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  filter: brightness(0.92);
+}
 .project-media-caption {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   padding: 8px 14px;
-  background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
   color: #fff;
   font-family: var(--font-mono);
   font-size: 11px;
@@ -507,14 +574,18 @@ img { max-width: 100%; display: block; }
    ============================================ */
 @media (max-width: 860px) {
   .nav-links { gap: 18px; font-size: 13px; }
-  .nav-links a:not(.nav-cta) { display: none; }
+  .nav-links a:not(.nav-cta):not(.nav-hire) { display: none; }
+  .nav-hire { padding: 7px 14px; font-size: 12px; }
   .about-grid { grid-template-columns: 1fr; gap: 32px; }
   .project-card { grid-template-columns: 1fr; }
-  .project-media { min-height: 200px; }
+  .project-media { min-height: 240px; }
+  .project-media--stacked > img { flex: none; height: 240px; }
+  .project-media-detail { flex: none; height: 140px; }
   .skills-grid { grid-template-columns: 1fr; gap: 36px; }
   .contact-grid { grid-template-columns: 1fr 1fr; }
   .kpi-strip { flex-direction: column; }
   .kpi-divider { width: 100%; height: 1px; }
+  .hero-available { font-size: 10.5px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
